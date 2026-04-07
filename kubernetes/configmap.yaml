@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mbta-kendall-config
+data:
+  AWS_REGION: "us-east-1"
+  DYNAMODB_TABLE: "mbta_kendall_redline"
+  S3_BUCKET: "mbta-kendall-tracker-2026"

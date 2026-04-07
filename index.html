@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MBTA Kendall/MIT Red Line Delay Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+    img {
+      max-width: 100%;
+      border: 1px solid #ccc;
+      padding: 8px;
+      background: white;
+    }
+    .links a {
+      display: inline-block;
+      margin-right: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>MBTA Red Line Kendall/MIT Delay Tracker</h1>
+  <p>
+    This project tracks real-time delay for the next southbound MBTA Red Line train at Kendall/MIT.
+    The pipeline collects live MBTA prediction data, stores observations in DynamoDB, and publishes
+    updated outputs to S3.
+  </p>
+
+  <h2>Latest Delay Plot</h2>
+  <img src="plot.svg" alt="MBTA Red Line delay plot">
+
+  <h2>Project Data</h2>
+  <div class="links">
+    <a href="data.csv" target="_blank">View data.csv</a>
+    <a href="plot.svg" target="_blank">View plot.svg</a>
+  </div>
+</body>
+</html>
