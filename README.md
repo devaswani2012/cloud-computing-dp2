@@ -67,15 +67,13 @@ The pipeline runs on a **single-node K3s cluster** hosted on an AWS EC2 instance
     │   └── utils.py
     ├── kubernetes/
     │   ├── configmap.yaml
-    │   ├── secret.yaml
     │   └── cronjob.yaml
-    └── output/
 
 ## Canvas Quiz
 
 ### 1. Which data source you chose and why.
 
-I chose the **MBTA V3 API** because it provides live prediction and schedule data for Boston transit in a format that is easy to query and automate. I wanted a data source with real operational variation over time, and MBTA arrival predictions are a good fit for a recurring pipeline because they update frequently and produce meaningful delay measurements. This project focuses on the **Red Line at Kendall/MIT**, which makes the dataset narrow, interpretable, and easy to visualize. :contentReference[oaicite:0]{index=0}
+I chose the **MBTA V3 API** because it provides live prediction and schedule data for Boston transit in a format that is easy to query and automate. I wanted a data source with real operational variation over time, and MBTA arrival predictions are a good fit for a recurring pipeline because they update frequently and produce meaningful delay measurements. This project focuses on the **Red Line at Kendall/MIT**, which makes the dataset narrow, interpretable, and easy to visualize.
 
 ### 2. What you observe in the data — any patterns, spikes, or surprises over the 72-hour window.
 
@@ -83,7 +81,7 @@ Over the collection window, the main pattern is that delay is **not constant**. 
 
 ### 3. How Kubernetes Secrets differ from plain environment variables and why that distinction matters.
 
-Plain environment variables are often written directly into a manifest or shell session in clear text. Kubernetes Secrets are a separate Kubernetes object designed for sensitive values such as API keys or credentials. In a manifest, the pod references the Secret by name, so the secret value itself does not need to be hardcoded into the CronJob definition. That matters because it reduces the chance of accidentally exposing sensitive values in source code, screenshots, or version control. It is not perfect security by itself, but it is better practice than placing secrets directly in ordinary environment variable declarations. :contentReference[oaicite:1]{index=1}
+Plain environment variables are often written directly into a manifest or shell session in clear text. Kubernetes Secrets are a separate Kubernetes object designed for sensitive values such as API keys or credentials. In a manifest, the pod references the Secret by name, so the secret value itself does not need to be hardcoded into the CronJob definition. That matters because it reduces the chance of accidentally exposing sensitive values in source code, screenshots, or version control. It is not perfect security by itself, but it is better practice than placing secrets directly in ordinary environment variable declarations.
 
 ### 4. How your CronJob pods gain permission to read/write to AWS services without credentials appearing in any file.
 
