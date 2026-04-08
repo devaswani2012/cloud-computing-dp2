@@ -2,6 +2,8 @@ import os
 import csv
 import boto3
 
+from botocore.exceptions import ClientError
+
 from app.config import (
     ROUTE_ID,
     STOP_ID,
@@ -94,6 +96,19 @@ def save_to_dynamodb(record: dict):
 
 def get_s3_client():
     return boto3.client("s3", region_name=AWS_REGION)
+
+
+def download_csv_from_s3_if_exists(local_path: str = CSV_FILE, s3_key: str = "data.csv"):
+    ensure_output_dir()
+    s3 = get_s3_client()
+
+    try:
+        s3.download_file(S3_BUCKET, s3_key, local_path)
+    except ClientError as e:
+        error_code = e.response.get("Error", {}).get("Code")
+        if error_code in ("404", "NoSuchKey"):
+            return
+        raise
 
 
 def upload_file_to_s3(local_path: str, s3_key: str, content_type: str):

@@ -1,6 +1,7 @@
 from app.mbta_api import get_next_prediction
 from app.storage import (
     build_record,
+    download_csv_from_s3_if_exists,
     append_to_csv,
     save_to_dynamodb,
     upload_outputs_to_s3,
@@ -14,6 +15,9 @@ def main():
 
     record = build_record(prediction)
     print("record:", record)
+
+    download_csv_from_s3_if_exists()
+    print("downloaded existing CSV from S3 if it exists")
 
     append_to_csv(record)
     print("saved record to CSV")
