@@ -46,6 +46,8 @@ The pipeline runs on a **single-node K3s cluster** hosted on an AWS EC2 instance
 
 `plot.svg` is a time-series visualization of delay over time.
 
+The pipeline produces two public output artifacts: data.csv and plot.svg. The data.csv file stores one row for each scheduled pipeline run, with fields including the observation timestamp, route and stop information, scheduled arrival time, predicted arrival time, computed delay in minutes, number of predictions returned, and a delay status label. Together, these rows form a growing time-series dataset of Red Line performance at Kendall/MIT. The plot.svg file is generated directly from that CSV and visualizes delay over time, making it easy to see how train performance changes across runs, including periods of normal service and larger delay spikes.
+
 - Website URL: `http://mbta-kendall-tracker-2026.s3-website-us-east-1.amazonaws.com`
 - Data URL: `https://mbta-kendall-tracker-2026.s3.amazonaws.com/data.csv`
 - Plot URL: `https://mbta-kendall-tracker-2026.s3.amazonaws.com/plot.svg`
